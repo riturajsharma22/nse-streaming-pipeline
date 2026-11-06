@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    database: NSE_STREAM
+    schema: RAW
+    tables:
+      - name: stock_candles_raw
+        identifier: STOCK_CANDLES_RAW
+        description: "1-minute NSE candles loaded by Snowpipe from S3. One row per JSON line; duplicates expected (at-least-once delivery)."

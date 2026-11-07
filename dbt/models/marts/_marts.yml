@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_stock_candles_1m
+    description: "One row per NSE stock per minute. Deduplicated and incremental (MERGE on symbol + candle_ts_utc)."
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: ['symbol', 'candle_ts_utc']
+    columns:
+      - name: symbol
+        description: "NSE ticker with .NS suffix"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['RELIANCE.NS', 'TCS.NS', 'HDFCBANK.NS', 'INFY.NS', 'ICICIBANK.NS']
+      - name: candle_ts_utc
+        description: "Candle start time (UTC)"
+        data_tests:
+          - not_null
+      - name: close_price
+        data_tests:
+          - not_null
+      - name: volume
+        description: "Shares traded in the minute"

@@ -1,0 +1,1 @@
+{{ ohlc_rollup(ref('fct_stock_candles_1m'), 5) }}
